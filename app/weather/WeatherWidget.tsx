@@ -1,4 +1,4 @@
-import { Cloud, Wind, Thermometer, HandHelping } from 'lucide-react'
+import { Cloud, Wind, Thermometer, HandHelping, Soup } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { fetchWeatherApi } from 'openmeteo'
 import { WeatherDisplay } from './WeatherDisplay'
@@ -58,7 +58,7 @@ async function getWeatherData() {
       precipitationHours: daily.variables(4)!.valuesArray()!,
       precipitationProbabilityMax: daily.variables(5)!.valuesArray()!,
     },
-
+    isPho: current.variables(0)!.value() < 78
   };
 
   return weatherData;
@@ -105,6 +105,10 @@ export default async function WeatherWidget() {
           <div className="flex items-center">
             <HandHelping className="mr-2" />
             <span>Feels like {Math.round(weather.current.feelsLike)}°F</span>
+          </div>
+          <div className="flex items-center">
+            <Soup className="mr-2" />
+            <span>Pho: {weather.isPho}</span>
           </div>
         </div>
       </CardContent>
